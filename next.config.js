@@ -2,7 +2,7 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // This is your original webpack config. It stays the same.
+  // Your original webpack config is fine.
   webpack: config => {
     const oneOfRule = config.module.rules.find(rule => rule.oneOf);
     const tsRules = oneOfRule.oneOf.filter(rule => rule.test && rule.test.toString().includes('tsx|ts'));
@@ -12,30 +12,15 @@ const nextConfig = {
     return config;
   },
 
-  // Your original config below.
-  compress: true,
-  generateEtags: true,
-  pageExtensions: ['tsx', 'mdx', 'ts'],
-  poweredByHeader: false,
-  productionBrowserSourceMaps: false,
+  // Standard Next.js settings
   reactStrictMode: true,
   swcMinify: true,
-  trailingSlash: false,
-  
+
+  // Your images config is correct for Vercel (optimization is enabled)
   images: {
-    // The `unoptimized: true` line has been REMOVED to re-enable Vercel's image optimization.
-    // Vercel fully supports this, so we should use it for better performance.
-    
-    // Your remotePatterns config is correct and stays.
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'source.unsplash.com',
-      },
+      { protocol: 'https', hostname: 'images.unsplash.com' },
+      { protocol: 'https', hostname: 'source.unsplash.com' },
     ],
   },
 };
